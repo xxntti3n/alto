@@ -30,6 +30,7 @@ from typing import (
 
 from doit.action import BaseAction
 from doit.reporter import ConsoleReporter
+from alto.logger import LOGGER
 
 __all__ = [
     "AltoAction",
@@ -382,6 +383,7 @@ class AltoTask:
 
     def set_teardown(self, *actions: AltoAction, extend: bool = True) -> "AltoTask":
         """Set the teardown actions for the task. These will be run after the task completes."""
+        LOGGER.info("Setting teardown actions")
         if extend:
             self._data.setdefault("teardown", []).extend(actions)
         else:
