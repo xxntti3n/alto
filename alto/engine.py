@@ -71,6 +71,7 @@ from alto.utils import (
     load_mapper_from_path,
     merge,
 )
+from alto.logger import LOGGER
 
 if t.TYPE_CHECKING:
     from dynaconf import Dynaconf, Validator
@@ -1410,6 +1411,7 @@ def update_remote_state(
     tap: str, target: str, pipeline_id: str, filesystem: AltoFileSystem, execute: bool = True
 ) -> None:
     """Update the remote state file."""
+    LOGGER.info(f"Updating state file for {tap} -> {target}.")
     if execute:
         stdout = Path(filesystem.log_path(f"state-{pipeline_id}.log"))
         if not stdout.exists() or stdout.stat().st_size == 0:
